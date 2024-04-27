@@ -1,0 +1,12 @@
+#include <winres.h>
+#include "rc.h"
+
+IDM_MAIN MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open",	ID_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",   ID_EXIT
+    END
+END
