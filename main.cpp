@@ -46,19 +46,19 @@ void main_window::on_command(int id)
 	{
 	case ID_OPEN:
 	{
-		wchar_t file_path[MAX_PATH];
-		file_path[0] = L'\0';
+		TCHAR file_path[MAX_PATH];
+		file_path[0] = _T('\0');
 
-		wchar_t file_filter[] = L"Image Files\0*.jpeg;*.jpg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.emf\0"
-			L"JPEG Files\0*.jpeg;*.jpg\0"
-			L"PNG Files\0*.png\0"
-			L"BMP Files\0*.bmp\0"
-			L"GIF Files\0*.gif\0"
-			L"TIFF Files\0*.tiff;*.tif\0"
-			L"EMF Files\0*.emf\0"
-			L"All Files\0*.*\0\0";
+		TCHAR file_filter[] = _T("Image Files\0*.jpeg;*.jpg;*.png;*.bmp;*.gif;*.tiff;*.tif;*.emf\0")
+			_T("JPEG Files\0*.jpeg;*.jpg\0")
+			_T("PNG Files\0*.png\0")
+			_T("BMP Files\0*.bmp\0")
+			_T("GIF Files\0*.gif\0")
+			_T("TIFF Files\0*.tiff;*.tif\0")
+			_T("EMF Files\0*.emf\0")
+			_T("All Files\0*.*\0\0");
 
-		OPENFILENAMEW open_dialog;
+		OPENFILENAME open_dialog;
 		ZeroMemory(&open_dialog, sizeof(open_dialog));
 
 		open_dialog.lStructSize = sizeof(open_dialog);
@@ -69,7 +69,7 @@ void main_window::on_command(int id)
 		open_dialog.nFilterIndex = 1;
 		open_dialog.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
-		if (GetOpenFileNameW(&open_dialog))
+		if (GetOpenFileName(&open_dialog))
 		{
 			current_filename = file_path;
 			loaded_image = std::make_unique<Gdiplus::Image>(file_path);
@@ -80,7 +80,7 @@ void main_window::on_command(int id)
 			else {
 				loaded_image.reset();
 				current_filename.clear();
-				MessageBox(*this, L"Failed to load the selected image file.", L"Error", MB_OK | MB_ICONERROR);
+				MessageBox(*this, _T("Failed to load the selected image file."), _T("Error"), MB_OK | MB_ICONERROR);
 			}
 		}
 	}
